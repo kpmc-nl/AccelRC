@@ -15,12 +15,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kpmc.accelrc.application.DaggerUtil;
+
+import javax.inject.Inject;
+
 import static android.hardware.Sensor.TYPE_ACCELEROMETER;
 
 public class AccelDebugActivity extends Activity implements SensorEventListener {
 
-    private SensorManager sensorManager;
+    @Inject protected SensorManager sensorManager;
     private Sensor accelSensor;
+
 
     private ProgressBar azimuthBar, pitchBar, rollBar;
     private TextView maxAzimuthTV, maxPitchTV, maxRollTV;
@@ -33,6 +38,8 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DaggerUtil.component(this).inject(this);
+
         setContentView(R.layout.activity_main);
 
         azimuthBar = (ProgressBar) findViewById(R.id.azimuthBar);
@@ -43,7 +50,7 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
         maxPitchTV = (TextView) findViewById(R.id.maxPitch);
         maxRollTV = (TextView) findViewById(R.id.maxRoll);
 
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+       // sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accelSensor = sensorManager.getDefaultSensor(TYPE_ACCELEROMETER);
 
 
@@ -120,9 +127,12 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
         maxPitch = Math.max(Math.abs(valuePitch), maxPitch);
         maxRoll = Math.max(Math.abs(valueAzimuth), maxRoll);
 
-        maxAzimuthTV.setText(valueAzimuth + "/" + maxAzimuth);
-        maxPitchTV.setText(valuePitch + "/" + maxPitch);
-        maxRollTV.setText(valueRoll + "/" + maxRoll);
+
+
+
+        maxAzimuthTV.setText(String.format("%.3f / %.3f", valueAzimuth, maxAzimuth));
+        maxPitchTV.setText(String.format("%.3f / %.3f", valuePitch, maxPitch));
+        maxRollTV.setText(String.format("%.3f / %.3f", valueRoll, maxRoll));
 
         azimuthBar.setProgress(50 + (int) (50 * valueAzimuth / maxAzimuth));
         pitchBar.setProgress(50 + (int) (50 * valuePitch / maxPitch));
