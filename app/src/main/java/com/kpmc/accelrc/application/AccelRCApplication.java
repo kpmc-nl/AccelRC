@@ -2,8 +2,9 @@ package com.kpmc.accelrc.application;
 
 import android.app.Application;
 
-import com.kpmc.accelrc.debug.AccelDebugActivity;
+import com.kpmc.accelrc.activity.debug.AccelDebugActivity;
 import com.kpmc.accelrc.AccelRCModule;
+import com.kpmc.accelrc.activity.main.MainActivity;
 
 import javax.inject.Singleton;
 
@@ -17,6 +18,7 @@ public class AccelRCApplication extends Application {
     @Singleton
     @Component(modules = AccelRCModule.class)
     public interface ApplicationComponent {
+        void inject(MainActivity mainActivity);
         void inject(AccelDebugActivity accelDebugActivity);
 
     }

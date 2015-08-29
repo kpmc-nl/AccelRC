@@ -1,107 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
-
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/azimuthBar"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:indeterminate="false" />
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/mainView">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="azimuth"
-        android:id="@+id/textView"
+        android:text="BT Status:"
+        android:id="@+id/btStatusLabel"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="pitch"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/azimuthBar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="OK. Connected to &lt;some-device>"
+        android:id="@+id/btStatus"
+        android:layout_marginStart="21dp"
+        android:layout_alignTop="@+id/btStatusLabel"
+        android:layout_toEndOf="@+id/btStatusLabel" />
 
-    <TextView
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="roll"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/pitchBar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/yWrap"
+        android:layout_alignStart="@+id/btStatusLabel"
+        android:id="@+id/xWrap">
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="X:"
+            android:id="@+id/xLabel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="-0.000"
+            android:id="@+id/xValue"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pitchBar"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/azimuthBar"
-        android:layout_alignEnd="@+id/azimuthBar"
-        android:indeterminate="false" />
+        android:layout_below="@+id/btStatusLabel"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/yWrap">
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Y:"
+            android:id="@+id/yLabel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="-0.000"
+            android:id="@+id/yValue"
+            android:layout_marginLeft="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rollBar"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/pitchBar"
-        android:layout_alignEnd="@+id/pitchBar"
-        android:indeterminate="false" />
+        android:layout_alignTop="@+id/yWrap"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/zWrap">
 
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Z:"
+            android:id="@+id/zLabel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="-0.000"
+            android:id="@+id/zValue"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
+
+    <com.kpmc.accelrc.view.RCStick
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="0"
-        android:id="@+id/maxAzimuth"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="0"
-        android:id="@+id/maxPitch"
-        android:layout_above="@+id/pitchBar"
-        android:layout_alignLeft="@+id/maxAzimuth"
-        android:layout_alignStart="@+id/maxAzimuth" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="0"
-        android:id="@+id/maxRoll"
-        android:layout_below="@+id/pitchBar"
-        android:layout_alignLeft="@+id/maxPitch"
-        android:layout_alignStart="@+id/maxPitch" />
+        android:id="@+id/view"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/yWrap"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
 </RelativeLayout>

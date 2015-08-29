@@ -1,7 +1,6 @@
-package com.kpmc.accelrc.debug;
+package com.kpmc.accelrc.activity.debug;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -23,8 +22,6 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static android.hardware.Sensor.TYPE_ACCELEROMETER;
-
 public class AccelDebugActivity extends Activity implements SensorEventListener {
 
     @Inject
@@ -41,11 +38,11 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
     @Bind(R.id.rollBar)
     protected ProgressBar rollBar;
 
-    @Bind(R.id.maxAzimuth)
+    @Bind(R.id.azimuthInfo)
     protected TextView azimuthTV;
-    @Bind(R.id.maxPitch)
+    @Bind(R.id.pitchInfo)
     protected TextView pitchTV;
-    @Bind(R.id.maxRoll)
+    @Bind(R.id.rollInfo)
     protected TextView rollTV;
 
     private float maxAzimuth, maxPitch, maxRoll;
@@ -55,7 +52,7 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_accel_debug);
         ButterKnife.bind(this);
         DaggerUtil.component(this).inject(this);
 
