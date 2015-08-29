@@ -1,4 +1,4 @@
-package com.kpmc.accelrc.application;
+package com.kpmc.accelrc.dagger;
 
 /**
  * Created by matthijs on 29/08/15.
@@ -11,5 +11,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Qualifier
 @Retention(RUNTIME)
-public @interface ApplicationContext {
+public @interface Accelerometer {
 }

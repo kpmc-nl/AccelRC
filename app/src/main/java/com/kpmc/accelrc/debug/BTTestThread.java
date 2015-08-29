@@ -1,4 +1,4 @@
-package com.kpmc.accelrc;
+package com.kpmc.accelrc.debug;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;

@@ -2,7 +2,7 @@ package com.kpmc.accelrc.application;
 
 import android.app.Application;
 
-import com.kpmc.accelrc.AccelDebugActivity;
+import com.kpmc.accelrc.debug.AccelDebugActivity;
 import com.kpmc.accelrc.AccelRCModule;
 
 import javax.inject.Singleton;

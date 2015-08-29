@@ -14,7 +14,7 @@
 
 
         <activity
-            android:name=".AccelDebugActivity"
+            android:name=".debug.AccelDebugActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>

@@ -18,16 +18,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        // needed for butterknife to work...
+        disable 'InvalidPackage'
+    }
+
+    packagingOptions {
+        // might be needed for butterknife.
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.0'
 
+    compile 'javax.annotation:jsr250-api:1.0'
     compile 'com.google.dagger:dagger:2.0.1'
     apt 'com.google.dagger:dagger-compiler:2.0.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
 //    provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile 'javax.annotation:jsr250-api:1.0'
    // compile 'org.glassfish:javax.annotation:3.2-b06'
 
 

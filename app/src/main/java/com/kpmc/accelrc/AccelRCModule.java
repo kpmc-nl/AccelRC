@@ -1,10 +1,12 @@
 package com.kpmc.accelrc;
 
 import android.content.Context;
+import android.hardware.Sensor;
 import android.hardware.SensorManager;
 
 import com.kpmc.accelrc.application.AccelRCApplication;
-import com.kpmc.accelrc.application.ApplicationContext;
+import com.kpmc.accelrc.dagger.Accelerometer;
+import com.kpmc.accelrc.dagger.ApplicationContext;
 
 import javax.inject.Singleton;
 
@@ -12,6 +14,7 @@ import dagger.Module;
 import dagger.Provides;
 
 import static android.content.Context.SENSOR_SERVICE;
+import static android.hardware.Sensor.TYPE_ACCELEROMETER;
 
 
 /**
@@ -38,5 +41,12 @@ public class AccelRCModule {
     @Singleton
     SensorManager provideSensorManager() {
         return (SensorManager) application.getSystemService(SENSOR_SERVICE);
+    }
+
+    @Provides
+    @Singleton
+    @Accelerometer
+    Sensor provideAccelerometer(SensorManager sensorManager){
+        return sensorManager.getDefaultSensor(TYPE_ACCELEROMETER);
     }
 }

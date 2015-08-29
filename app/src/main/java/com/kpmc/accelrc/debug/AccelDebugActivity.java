@@ -1,8 +1,7 @@
-package com.kpmc.accelrc;
+package com.kpmc.accelrc.debug;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,61 +14,68 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kpmc.accelrc.application.DaggerUtil;
+import com.kpmc.accelrc.R;
+import com.kpmc.accelrc.dagger.Accelerometer;
+import com.kpmc.accelrc.dagger.DaggerUtil;
 
 import javax.inject.Inject;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import static android.hardware.Sensor.TYPE_ACCELEROMETER;
 
 public class AccelDebugActivity extends Activity implements SensorEventListener {
 
-    @Inject protected SensorManager sensorManager;
-    private Sensor accelSensor;
+    @Inject
+    @Accelerometer
+    protected Sensor accelSensor;
 
+    @Inject
+    protected SensorManager sensorManager;
 
-    private ProgressBar azimuthBar, pitchBar, rollBar;
-    private TextView maxAzimuthTV, maxPitchTV, maxRollTV;
+    @Bind(R.id.azimuthBar)
+    protected ProgressBar azimuthBar;
+    @Bind(R.id.pitchBar)
+    protected ProgressBar pitchBar;
+    @Bind(R.id.rollBar)
+    protected ProgressBar rollBar;
+
+    @Bind(R.id.maxAzimuth)
+    protected TextView azimuthTV;
+    @Bind(R.id.maxPitch)
+    protected TextView pitchTV;
+    @Bind(R.id.maxRoll)
+    protected TextView rollTV;
 
     private float maxAzimuth, maxPitch, maxRoll;
 
-
-    private BluetoothAdapter bluetoothAdapter;
+ //   private BluetoothAdapter bluetoothAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         DaggerUtil.component(this).inject(this);
 
-        setContentView(R.layout.activity_main);
 
-        azimuthBar = (ProgressBar) findViewById(R.id.azimuthBar);
-        pitchBar = (ProgressBar) findViewById(R.id.pitchBar);
-        rollBar = (ProgressBar) findViewById(R.id.rollBar);
-
-        maxAzimuthTV = (TextView) findViewById(R.id.maxAzimuth);
-        maxPitchTV = (TextView) findViewById(R.id.maxPitch);
-        maxRollTV = (TextView) findViewById(R.id.maxRoll);
-
-       // sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        accelSensor = sensorManager.getDefaultSensor(TYPE_ACCELEROMETER);
-
-
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (null == bluetoothAdapter) {
-            Toast.makeText(this, "No bluetooth adapter.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (!bluetoothAdapter.isEnabled()) {
-            Toast.makeText(this, "Bluetooth not enabled.", Toast.LENGTH_SHORT).show();
-        }
-
-        for (BluetoothDevice dev : bluetoothAdapter.getBondedDevices()) {
-            if("HC-06".equals(dev.getName())){
-                Toast.makeText(this, "Found the right device!", Toast.LENGTH_SHORT).show();;
-                new BTTestThread(dev, this).start();
-            }
-        }
+//        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        if (null == bluetoothAdapter) {
+//            Toast.makeText(this, "No bluetooth adapter.", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        if (!bluetoothAdapter.isEnabled()) {
+//            Toast.makeText(this, "Bluetooth not enabled.", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        for (BluetoothDevice dev : bluetoothAdapter.getBondedDevices()) {
+//            if("HC-06".equals(dev.getName())){
+//                Toast.makeText(this, "Found the right device!", Toast.LENGTH_SHORT).show();;
+//                //new BTTestThread(dev, this).start();
+//            }
+//        }
 
 
     }
@@ -128,11 +134,9 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
         maxRoll = Math.max(Math.abs(valueAzimuth), maxRoll);
 
 
-
-
-        maxAzimuthTV.setText(String.format("%.3f / %.3f", valueAzimuth, maxAzimuth));
-        maxPitchTV.setText(String.format("%.3f / %.3f", valuePitch, maxPitch));
-        maxRollTV.setText(String.format("%.3f / %.3f", valueRoll, maxRoll));
+        azimuthTV.setText(String.format("%.3f / %.3f", valueAzimuth, maxAzimuth));
+        pitchTV.setText(String.format("%.3f / %.3f", valuePitch, maxPitch));
+        rollTV.setText(String.format("%.3f / %.3f", valueRoll, maxRoll));
 
         azimuthBar.setProgress(50 + (int) (50 * valueAzimuth / maxAzimuth));
         pitchBar.setProgress(50 + (int) (50 * valuePitch / maxPitch));
