@@ -1,10 +1,13 @@
 package com.kpmc.accelrc;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.preference.PreferenceManager;
 
 import com.kpmc.accelrc.application.AccelRCApplication;
+import com.kpmc.accelrc.core.CoreModule;
 import com.kpmc.accelrc.dagger.Accelerometer;
 import com.kpmc.accelrc.dagger.ApplicationContext;
 
@@ -20,7 +23,7 @@ import static android.hardware.Sensor.TYPE_ACCELEROMETER;
 /**
  * Created by matthijs on 29/08/15.
  */
-@Module
+@Module(includes = CoreModule.class)
 public class AccelRCModule {
 
     private final AccelRCApplication application;
@@ -46,7 +49,15 @@ public class AccelRCModule {
     @Provides
     @Singleton
     @Accelerometer
-    Sensor provideAccelerometer(SensorManager sensorManager){
+    Sensor provideAccelerometer(SensorManager sensorManager) {
         return sensorManager.getDefaultSensor(TYPE_ACCELEROMETER);
     }
+
+
+    @Provides
+    @Singleton
+    SharedPreferences provideSharedPreferences(@ApplicationContext Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
 }

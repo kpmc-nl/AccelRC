@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="User Settings" >
+    <PreferenceCategory android:title="Forward/backward motion">
+        <ListPreference
+            android:defaultValue="@string/xAxis"
+            android:entries="@array/accelerometerAxes"
+            android:entryValues="@array/accelerometerAxes"
+            android:key="@string/pref_fb_bind"
+            android:summary="%s"
+            android:title="Motion axis" />
+
+        <SeekBarPreference
+            android:defaultValue="16"
+            android:key="@string/pref_fb_extreme"
+            android:max="20"
+            android:title="Extreme value" />
+
         <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="vibratePreference"
-            android:summary="Vibrate on adds and updates"
-            android:title="Vibrate" />
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="soundPreference"
-            android:summary="Play sound on adds and updates"
-            android:title="Sound" />
+            android:defaultValue="false"
+            android:key="@string/pref_fb_reverse"
+            android:title="Reverse" />
+
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Left/right motion">
+        <ListPreference
+            android:defaultValue="@string/yAxis"
+            android:entries="@array/accelerometerAxes"
+            android:entryValues="@array/accelerometerAxes"
+            android:key="@string/pref_rl_bind"
+            android:summary="%s"
+            android:title="Motion axis" />
+
+        <SeekBarPreference
+            android:defaultValue="16"
+            android:key="@string/pref_rl_extreme"
+            android:max="20"
+            android:title="Extreme value" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_rl_reverse"
+            android:title="Reverse" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

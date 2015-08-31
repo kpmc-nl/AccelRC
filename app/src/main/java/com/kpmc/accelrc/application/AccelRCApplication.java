@@ -5,7 +5,7 @@ import android.app.Application;
 import com.kpmc.accelrc.activity.debug.AccelDebugActivity;
 import com.kpmc.accelrc.AccelRCModule;
 import com.kpmc.accelrc.activity.main.MainActivity;
-import com.kpmc.accelrc.preferences.PreferenceActivity;
+import com.kpmc.accelrc.activity.preferences.PreferenceActivity;
 
 import javax.inject.Singleton;
 

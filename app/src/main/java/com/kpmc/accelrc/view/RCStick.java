@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.google.common.base.Preconditions;
+import com.kpmc.accelrc.android.logging.LogHelper;
+import com.kpmc.accelrc.android.logging.Logger;
 
 import static android.graphics.Color.BLACK;
 import static android.view.View.MeasureSpec.EXACTLY;
@@ -17,6 +19,7 @@ import static android.view.View.MeasureSpec.EXACTLY;
  * Created by matthijs on 29/08/15.
  */
 public class RCStick extends View {
+    private final Logger log = LogHelper.getLogger(this);
 
     /* Resolutions; total throw will be 2*[resolution]. (both negative and positive) */
     public int vResolution = 100;//Integer.MAX_VALUE;
@@ -40,14 +43,14 @@ public class RCStick extends View {
     }
 
     public void updateVertical(int value) {
-        Preconditions.checkArgument(Math.abs(value) <= vResolution, "New vertical value may not exceed resolution.");
+        Preconditions.checkArgument(Math.abs(value) <= vResolution, "New vertical value (%s) may not exceed resolution.", value);
         this.vValue = value;
 
         this.invalidate();
     }
 
     public void updateHorizontal(int value) {
-        Preconditions.checkArgument(Math.abs(value) <= hResolution, "New horizontal value may not exceed resolution.");
+        Preconditions.checkArgument(Math.abs(value) <= hResolution, "New horizontal value (%s) may not exceed resolution.", value);
         this.hValue = value;
 
         this.invalidate();

@@ -1,6 +1,23 @@
 <resources>
     <string name="app_name">AccelRC</string>
-
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="pref_fb_bind">fb_bind</string>
+    <string name="pref_rl_bind">rl_bind</string>
+    <string name="pref_fb_extreme">fb_extreme</string>
+    <string name="pref_rl_extreme">rl_extreme</string>
+    <string name="pref_fb_reverse">fb_reverse</string>
+    <string name="pref_rl_reverse">rl_reverse</string>
+
+    <string name="xAxis">X-Axis</string>
+    <string name="yAxis">Y-Axis</string>
+    <string name="zAxis">Z-Axis</string>
+
+    <string-array name="accelerometerAxes">
+        <item>X-Axis</item>
+        <item>Y-Axis</item>
+        <item>Z-Axis</item>
+    </string-array>
+
 </resources>

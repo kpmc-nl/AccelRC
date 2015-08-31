@@ -1,4 +1,4 @@
-package com.kpmc.accelrc.preferences;
+package com.kpmc.accelrc.activity.preferences;
 
 import android.os.Bundle;
 
