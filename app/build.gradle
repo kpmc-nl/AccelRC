@@ -39,6 +39,7 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.google.guava:guava:18.0'
+    compile 'com.akexorcist:bluetoothspp:1.0.0'
 
 //    provided 'org.glassfish:javax.annotation:10.0-b28'
    // compile 'org.glassfish:javax.annotation:3.2-b06'

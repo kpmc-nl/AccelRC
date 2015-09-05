@@ -2,8 +2,8 @@ package com.kpmc.accelrc.application;
 
 import android.app.Application;
 
-import com.kpmc.accelrc.activity.debug.AccelDebugActivity;
 import com.kpmc.accelrc.AccelRCModule;
+import com.kpmc.accelrc.activity.debug.AccelDebugActivity;
 import com.kpmc.accelrc.activity.main.MainActivity;
 import com.kpmc.accelrc.activity.preferences.PreferenceActivity;
 
@@ -22,7 +22,6 @@ public class AccelRCApplication extends Application {
         void inject(MainActivity mainActivity);
         void inject(PreferenceActivity preferenceActivity);
         void inject(AccelDebugActivity accelDebugActivity);
-
     }
 
     private ApplicationComponent component;

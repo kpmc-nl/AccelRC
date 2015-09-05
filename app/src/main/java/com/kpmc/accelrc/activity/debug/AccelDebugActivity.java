@@ -45,7 +45,6 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
 
     private float maxAzimuth, maxPitch, maxRoll;
 
- //   private BluetoothAdapter bluetoothAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,24 +52,6 @@ public class AccelDebugActivity extends Activity implements SensorEventListener 
         setContentView(R.layout.activity_accel_debug);
         ButterKnife.bind(this);
         DaggerUtil.component(this).inject(this);
-
-
-//        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//        if (null == bluetoothAdapter) {
-//            Toast.makeText(this, "No bluetooth adapter.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if (!bluetoothAdapter.isEnabled()) {
-//            Toast.makeText(this, "Bluetooth not enabled.", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        for (BluetoothDevice dev : bluetoothAdapter.getBondedDevices()) {
-//            if("HC-06".equals(dev.getName())){
-//                Toast.makeText(this, "Found the right device!", Toast.LENGTH_SHORT).show();;
-//                //new BTTestThread(dev, this).start();
-//            }
-//        }
 
 
     }
