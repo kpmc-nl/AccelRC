@@ -7,7 +7,6 @@ import com.kpmc.accelrc.R;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 
@@ -49,6 +48,9 @@ public class MotionSensorPreferencesImpl implements MotionSensorPreferences {
     @BindString(R.string.pref_rl_reverse)
     protected String prefRlReverse;
 
+    @BindString(R.string.pref_lowpass_alpha)
+    protected String prefLowPassAlpha;
+
 
     @Inject
     public MotionSensorPreferencesImpl(SharedPreferences sharedPreferences) {
@@ -77,6 +79,13 @@ public class MotionSensorPreferencesImpl implements MotionSensorPreferences {
         binding.extreme = getRLExtreme();
         binding.reversed = isRLReversed();
         return binding;
+    }
+
+    @Override
+    public float getLowPassAlpha() {
+        int alphaSliderVal = sharedPreferences.getInt(prefLowPassAlpha, 20);
+
+        return ((float) alphaSliderVal) / 100f;
     }
 
     private MotionSensorAxis getFBAxis() {

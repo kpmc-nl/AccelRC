@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         textViewMotionSenorRawListener = new TextViewMotionSenorRawListener(xValue, yValue, zValue);
         btMotionSensorListener = new BluetoothMotionSensorListener(bt);
 
+        // prevent screen from sleeping :)
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override

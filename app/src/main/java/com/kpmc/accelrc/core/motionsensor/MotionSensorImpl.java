@@ -5,7 +5,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Sets;
 import com.kpmc.accelrc.android.logging.LogHelper;
 import com.kpmc.accelrc.android.logging.Logger;
@@ -33,6 +32,9 @@ public class MotionSensorImpl implements MotionSensor, SensorEventListener {
     private Set<Listener> listeners;
     private Set<RawListener> rawListeners;
 
+    private float lowPassAlpha = 0.2f;
+    private final Float[] memory = new Float[3];
+
     @Inject
     public MotionSensorImpl(SensorManager sensorManager,
                             @Accelerometer Sensor accelerometer,
@@ -49,6 +51,7 @@ public class MotionSensorImpl implements MotionSensor, SensorEventListener {
     public void invalidatePreferences() {
         fbBinding = motionSensorPreferences.getFrontBackBinding();
         rlBinding = motionSensorPreferences.getRightLeftBinding();
+        lowPassAlpha = motionSensorPreferences.getLowPassAlpha();
     }
 
     @Override
@@ -95,7 +98,7 @@ public class MotionSensorImpl implements MotionSensor, SensorEventListener {
         synchronized (listeners) {
             if (listeners.isEmpty()) {
                 invalidatePreferences();
-                sensorManager.registerListener(this, accelerometer, 10* SensorManager.SENSOR_DELAY_GAME);
+                sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
             }
             funct.apply();
             log.d("Added Listener.");
@@ -116,9 +119,21 @@ public class MotionSensorImpl implements MotionSensor, SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         /* According to the Android documentation */
-        float z = event.values[0];
-        float x = event.values[1];
-        float y = event.values[2];
+
+
+        for (int i = 0; i < 3; i++) {
+            if (null == memory[i]) {
+                memory[i] = event.values[i];
+            } else {
+                memory[i] = memory[i] + lowPassAlpha * (event.values[i] - memory[i]);
+            }
+
+
+        }
+
+        float z = memory[0];
+        float x = memory[1];
+        float y = memory[2];
 
         float fbValue = calculate(fbBinding, x, y, z);
         float rlValue = calculate(rlBinding, x, y, z);

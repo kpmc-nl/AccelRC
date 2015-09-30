@@ -24,4 +24,6 @@ public interface MotionSensorPreferences {
 
     MotionSensorBinding getRightLeftBinding();
 
+    float getLowPassAlpha();
+
 }

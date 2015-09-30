@@ -5,6 +5,8 @@
     <string name="action_accel_debug">AccelDebug</string>
 
 
+    <string name="pref_lowpass_alpha">low_pass_alpha</string>
+
     <string name="pref_fb_bind">fb_bind</string>
     <string name="pref_rl_bind">rl_bind</string>
     <string name="pref_fb_extreme">fb_extreme</string>
