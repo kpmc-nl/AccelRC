@@ -1,0 +1,3 @@
+[submodule "controller-board/Arduino-CMake-Template"]
+	path = controller-board/Arduino-CMake-Template
+	url = git@github.com:matthijs-oosterhoff/Arduino-CMake-Template.git
