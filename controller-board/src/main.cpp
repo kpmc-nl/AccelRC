@@ -6,7 +6,6 @@
 */
 #include <Arduino.h>
 #include <Servo.h>
-#include <HardwareSerial.h>
 
 Servo myServo1;
 Servo myServo2;
