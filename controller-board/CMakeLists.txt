@@ -11,6 +11,7 @@ add_definitions(-DARDUINO_ARCH_AVR)
 
 include(cmake/arduino-1.6.cmake)
 include(cmake/avr-toolchain.cmake)
+include(cmake/download-nanopb.cmake)
 
 set(ARDUINO_SOURCE_FILES
 
@@ -29,6 +30,8 @@ set(ARDUINO_SOURCE_FILES
         ${ARDUINO_CORE_DIR}/new.cpp
 
         ${ARDUINO_LIB_DIR}/Servo/src/avr/Servo.cpp
+
+        ${NANOPB_SRC}
         )
 
 include_directories("${ARDUINO_LIB_DIR}/Servo/src")
@@ -39,4 +42,7 @@ set(ACCELRC_SOURCE_FILES
         )
 
 
-add_executable(${CMAKE_PROJECT_NAME} ${ACCELRC_SOURCE_FILES})
+
+add_executable(
+        ${CMAKE_PROJECT_NAME}
+        ${ACCELRC_SOURCE_FILES})

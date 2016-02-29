@@ -6,6 +6,7 @@
 */
 #include <Arduino.h>
 #include <Servo.h>
+#include <pb.h>
 
 Servo myServo1;
 Servo myServo2;
